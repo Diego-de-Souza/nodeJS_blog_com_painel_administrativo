@@ -1,0 +1,38 @@
+{
+  "name": "blog_com_painel_adminitrativo",
+  "version": "1.0.0",
+  "description": "blog com painel administrativo com node para projeto de curso da udemy",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "debug": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:ejs": "/node_modules/.bin/ejs-lint views/index.ejs",
+    "migrations:create": "sequelize migration:create",
+    "migrations:run": "sequelize db:migrate",
+    "migrations:undo": "sequelize db:migrate:undo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diego-de-Souza/nodeJS_blog_com_painel_administrativo.git"
+  },
+  "author": "Diego de Souza Lima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diego-de-Souza/nodeJS_blog_com_painel_administrativo/issues"
+  },
+  "homepage": "https://github.com/Diego-de-Souza/nodeJS_blog_com_painel_administrativo#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "ejs-lint": "^2.0.0",
+    "nodemon": "^3.1.4"
+  }
+}
