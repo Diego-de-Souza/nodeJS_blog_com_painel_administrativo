@@ -52,3 +52,16 @@ exports.updateCategoryById = async function(id, callBack){
         return callBack(err);
     }
 }
+
+exports.updateTitleCategory = async function(title, id, callBack){
+    try{
+        const updateTitleCategory = await Category.update({title:title, slug: slugify(title)},{where:{id: id}})
+        if(updateTitleCategory == null){
+            return callBack(null, {status:404});
+        }else{
+            return callBack(null, {status:200, result:updateTitleCategory});
+        }
+    }catch (err){
+        return callBack(err);
+    }
+}

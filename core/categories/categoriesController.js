@@ -48,7 +48,7 @@ router.post("/delete", (req, res) => {
     }
 });
 
-router.get("/admin/categories/edit/:id", (req,res)=>{
+router.get("/admin/categories/update/:id", (req,res)=>{
     var id = req.params.id;
     if(isNaN(id)){
         res.redirect('/categories');
@@ -66,10 +66,11 @@ router.get("/admin/categories/edit/:id", (req,res)=>{
     })
 })
 
-router.post("/update", (req,res)=>{
+router.post("/update/title/:id", (req,res)=>{
+    var id = req.params.id;
     var title = req.body.title;
     if(title != undefined){
-        categoriesService.createTitleCategory(title, (err, resp)=>{
+        categoriesService.updateTitleCategory(title, id, (err, resp)=>{
             if(err){
                 return res.redirect("admin/categories/new");
             }
