@@ -1,24 +1,21 @@
-// Importando a biblioteca sequelize
-const { Sequelize, DataTypes } = require("sequelize");
-// Importando a conexão com o banco
+const { DataTypes } = require("sequelize");
 const connection = require("../../database/database");
 
-// Criando um model com sequelize
-const Category = connection.define('categories', {
+const Category = connection.define('Category', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-      },
-      title: {
+    },
+    title: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      slug: {
+    },
+    slug: {
         type: DataTypes.STRING,
         allowNull: false
-      }
+    }
 });
 
-// Exportando o modelo
-module.exports = { Category };
+// Exportar o modelo diretamente
+module.exports = Category;

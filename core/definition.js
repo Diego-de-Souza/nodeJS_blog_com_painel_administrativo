@@ -1,15 +1,11 @@
-const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const Category = require('./categories/Category');
+const Article = require('./articles/Article');
 
-const sequelize = new Sequelize(connection);
+// Definindo as associações
+Category.hasMany(Article, { foreignKey: 'categoryId', as: 'articles' });
+Article.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 
-exports.sequelize = sequelize;
-exports.Sequelize = Sequelize;
-
-exports.Articles = sequelize.import('./articles/Article');
-exports.Category = sequelize.import('./categories/Category');
-
-//relacionamentos
-exports.Category.hasMany(exports.Article);
-exports.Articles.belongsTo(exports.Category);
-
+module.exports = {
+    Category,
+    Article
+};

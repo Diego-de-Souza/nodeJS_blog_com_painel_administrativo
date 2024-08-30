@@ -1,7 +1,7 @@
-const {Sequelize, DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const connection = require("../../database/database");
 
-const Article = connection.define('articles', {
+const Article = connection.define('Article', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -19,14 +19,15 @@ const Article = connection.define('articles', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    categoryId: {  // Campo de chave estrangeira
+    categoryId: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'categories', // Nome da tabela de referência
+            model: 'categories', 
             key: 'id'
         },
         allowNull: false
     }
-})
+});
 
-module.exports = {Article};
+// Exportar o modelo diretamente
+module.exports = Article;
