@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const categoriesService = require('./categoriesService');
+const adminAuth = require("../../middlewares/adminAuth");
 
-router.get("/admin/categories/new", (req,res)=>{
+router.get("/admin/categories/new", adminAuth, (req,res)=>{
     res.render("admin/categories/new");
 })
 
-router.post("/save", (req,res)=>{
+router.post("/save", adminAuth , (req,res)=>{
     var title = req.body.title;
     if(title != undefined){
         categoriesService.createTitleCategory(title, (err, resp)=>{
@@ -21,7 +22,7 @@ router.post("/save", (req,res)=>{
     }
 })
 
-router.get("/", (req, res)=>{
+router.get("/", adminAuth, (req, res)=>{
 
     categoriesService.getCategories((err, resp)=>{
         if(err){
@@ -33,7 +34,7 @@ router.get("/", (req, res)=>{
     
 })
 
-router.post("/delete", (req, res) => {
+router.post("/delete", adminAuth, (req, res) => {
     var id = req.body.id;
     if (id != undefined && !isNaN(id)) { // verifica se o id é um número e não é nulo
         categoriesService.deleteCategory(id, (err, resp) => {
@@ -48,7 +49,7 @@ router.post("/delete", (req, res) => {
     }
 });
 
-router.get("/admin/categories/update/:id", (req,res)=>{
+router.get("/admin/categories/update/:id", adminAuth, (req,res)=>{
     var id = req.params.id;
     if(isNaN(id)){
         res.redirect('/categories');
@@ -66,7 +67,7 @@ router.get("/admin/categories/update/:id", (req,res)=>{
     })
 })
 
-router.post("/update/title/:id", (req,res)=>{
+router.post("/update/title/:id", adminAuth, (req,res)=>{
     var id = req.params.id;
     var title = req.body.title;
     if(title != undefined){

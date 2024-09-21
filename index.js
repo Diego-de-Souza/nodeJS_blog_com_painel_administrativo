@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
+const session = require("express-session");
 
 // Carrega as definições e associações
 require('./core/definition');
@@ -9,7 +10,13 @@ require('./core/definition');
 const categoriesController = require("./core/categories/categoriesController");
 const articlesController = require("./core/articles/articlesController");
 const homeController = require("./core/home/homeController");
-const Article = require("./core/articles/Article");
+const usersController = require("./core/users/usersController");
+
+//session
+app.use(session({
+    secret: "testesegurancateste",
+    cookie:{ maxAge:600000}
+}))
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -27,6 +34,7 @@ connection.authenticate()
 app.use("/categories", categoriesController);
 app.use("/articles", articlesController);
 app.use("/home", homeController);
+app.use("/users", usersController);
 
 // Redireciona a raiz para /home
 app.get('/', (req, res) => {

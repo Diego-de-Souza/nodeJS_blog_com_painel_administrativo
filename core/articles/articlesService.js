@@ -65,10 +65,10 @@ exports.updateArticleById = async function (id, callBack) {
     }
 }
 
-exports.updateBodyArticle = async function (body, id, callBack) {
+exports.updateBodyArticle = async function (body, id,title,category, callBack) {
     try {
         const updateBodyArticle = await Article.update({
-            body: body
+            body: body, title: title, categoryId: category, slug: slugify(title)
         }, {
             where: {
                 id: id
@@ -79,6 +79,45 @@ exports.updateBodyArticle = async function (body, id, callBack) {
         } else {
             return callBack(null, { status: 200, result: updateBodyArticle });
         }
+    } catch (err) {
+        return callBack(err);
+    }
+}
+
+exports.buscaPaginacao = async function(page, callBack) {
+    try {
+        let offset = 0;
+
+        // Verificação da página
+        if (isNaN(page) || page == 1) {
+            offset = 0;
+        } else {
+            offset = (parseInt(page) - 1) * 4;
+        }
+
+        const buscaComContagem = await Article.findAndCountAll({
+            limit: 4,
+            offset: offset
+        });
+
+        // Determina se há uma próxima página
+        let next;
+        if (offset + 4 >= buscaComContagem.count) {
+            next = false;
+        } else {
+            next = true;
+        }
+
+        let result = {
+            next: next,
+            articles: buscaComContagem.rows,  
+            total: buscaComContagem.count,
+            pageSet: parseInt(page)   
+        };
+
+        const categories = await Category.findAll();let pageSet = parseInt(page);
+
+        return callBack(null, {result, categories});
     } catch (err) {
         return callBack(err);
     }

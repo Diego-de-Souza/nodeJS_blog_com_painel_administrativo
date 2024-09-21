@@ -8,7 +8,7 @@
     "debug": "nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:ejs": "/node_modules/.bin/ejs-lint views/index.ejs",
-    "migrations:create": "sequelize migration:create",
+    "migrations:create": "npx sequelize migration:create --name",
     "migrations:run": "sequelize db:migrate",
     "migrations:undo": "sequelize db:migrate:undo"
   },
@@ -23,16 +23,18 @@
   },
   "homepage": "https://github.com/Diego-de-Souza/nodeJS_blog_com_painel_administrativo#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "mysql2": "^3.11.0",
     "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
     "ejs-lint": "^2.0.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "sequelize-cli": "^6.6.2"
   }
 }
