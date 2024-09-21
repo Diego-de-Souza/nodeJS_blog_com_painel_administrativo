@@ -61,12 +61,12 @@ BLOG_WITH_ADMIN_PANEL/
 
 3. Execute as migrações para configurar o banco de dados:
     ```bash
-    npx sequelize-cli db:migrate
+    npm run migrations:run
     ```
 
 4. Inicie o servidor de desenvolvimento usando o Nodemon:
     ```bash
-    npm run dev
+    npm run start
     ```
 
 ---
